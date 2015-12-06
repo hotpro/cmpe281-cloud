@@ -107,7 +107,9 @@ chmod a+x startup-instance1.sh shutdown-instance1.sh
 tail -f /var/log/nginx/access.log
 
 #tomcat cluster, enable
+```
 <Cluster className="org.apache.catalina.ha.tcp.SimpleTcpCluster"/>
+```
 
 #install maven
 ```
