@@ -103,6 +103,8 @@ cd $CATALINA_HOME/bin
 ./shutdown.sh
 chmod a+x startup-instance1.sh shutdown-instance1.sh
 ```
+#Nginx Log
+tail -f /var/log/nginx/access.log
 
 #tomcat cluster, enable
 <Cluster className="org.apache.catalina.ha.tcp.SimpleTcpCluster"/>
