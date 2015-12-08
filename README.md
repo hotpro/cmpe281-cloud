@@ -62,6 +62,9 @@ tar -zxvf apache-tomcat-8.0.28.tar.gz
 ls package/apache-tomcat-8.0.28
 vim ~/.bashrc
 
+// check log
+tail -f logs/catalina.2015-12-07.log
+
 
 export JAVA_HOME=/usr/lib/jvm/java-7-oracle/
 export CATALINA_HOME=/home/ubuntu/package/apache-tomcat-8.0.28
