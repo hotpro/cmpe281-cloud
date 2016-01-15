@@ -141,6 +141,9 @@ mkdir development/github
 git clone
 mvn clean package
 mv cmpe281.war package/apache-tomcat-8.0.28/webapps/
+
+web.xml
+<distributable />
 ```
 
 # test
