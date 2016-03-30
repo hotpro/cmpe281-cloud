@@ -131,7 +131,7 @@ mvn --version
 ```
 vim apache-tomcat-8.0.28/conf/tomcat-users.xml
 <role rolename="manager-gui"/>
-<user username="hotpro" password="Maxwell4" roles="manager-gui"/>
+<user username="root" password="root" roles="manager-gui"/>
 ```
 
 
