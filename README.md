@@ -13,35 +13,6 @@ sudo apt-get install git
 sudo apt-get install vim
 ```
 
-#nginx
-```
-sudo apt-get install nginx
-sudo /etc/init.d/nginx start
-sudo /etc/init.d/nginx stop
-sudo /etc/init.d/nginx restart
-```
-#nginx config
-sudo vim /etc/nginx/conf.d/tomcat.conf
-```
-upstream mywebapp1 {
-		ip_hash;
-        server   127.0.0.1:8080;
-        server   127.0.0.1:8181;
-}
-
-server {
-    listen 80;
-
-    location / {
-        proxy_pass http://mywebapp1;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-    }
-}
-```
-
 mkdir package
 cd package/
 
@@ -84,6 +55,7 @@ mkdir tomcat-instance1
 
 Create one folder named “tomcat-instance1” and copy conf, logs, temp, webapps, work folder from CATALINA_HOME folder and change conf/server.xml file in tomcat-instance1. Change these ports: shutdown port, connector port, ajp port and redirect port as follow:
 ```
+cp -R conf/ logs/ temp/ webapps/ work/ ../tomcat-instance1/
 <server port="8105" shutdown="SHUTDOWN">
 	.....
 	<connector
@@ -106,6 +78,39 @@ cd $CATALINA_HOME/bin
 ./shutdown.sh
 chmod a+x startup-instance1.sh shutdown-instance1.sh
 ```
+
+#nginx
+```
+sudo apt-get install nginx
+sudo /etc/init.d/nginx start
+sudo /etc/init.d/nginx stop
+sudo /etc/init.d/nginx restart
+```
+#nginx config
+sudo vim /etc/nginx/conf.d/tomcat.conf
+```
+cd /etc/nginx/sites-available
+sudo mv default /home/ubuntu/
+
+upstream mywebapp1 {
+		ip_hash;
+        server   127.0.0.1:8080;
+        server   127.0.0.1:8181;
+}
+
+server {
+    listen 80;
+
+    location / {
+        proxy_pass http://mywebapp1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+```
+
 #Nginx Log
 tail -f /var/log/nginx/access.log
 
